@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>To‘ti ovi</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+    margin: 0;
+    padding: 15px;
+}
+
+h1 {
+    color: #4a148c;
+    font-size: clamp(25px, 5vw, 34px);
+}
+
+.oyin-sharti {
+    color: #4a148c;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+button {
+    background: #6a1b9a;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+button:hover {
+    background: #4a148c;
+}
+
+#qayta {
+    margin: 5px 0 12px;
+}
+
+#boshqaruvMatni {
+    margin: 10px 0;
+    color: #4a148c;
+}
+
+#oyinMaydoni {
+    width: 100%;
+    max-width: 800px;
+    height: 500px;
+    margin: 10px auto;
+    background: linear-gradient(#b3e5fc, #e1f5fe);
+    border: 4px solid #1565c0;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    touch-action: none;
+}
+
+#ochko {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: clamp(16px, 3.5vw, 23px);
+    font-weight: bold;
+    color: #1565c0;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 6px 9px;
+    border-radius: 8px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+#toti {
+    position: absolute;
+    left: 30px;
+    top: 200px;
+    font-size: 48px;
+    line-height: 1;
+    z-index: 2;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
+}
+
+.yulduz {
+    position: absolute;
+    font-size: 35px;
+    line-height: 1.2;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
+}
+
+#xabar {
+    color: #4a148c;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 15px;
+    min-height: 28px;
+}
+
+#boshqaruv {
+    margin: 10px auto;
+    text-align: center;
+    user-select: none;
+}
+
+#boshqaruv button {
+    width: 64px;
+    height: 54px;
+    padding: 0;
+    margin: 3px;
+    font-size: 25px;
+    touch-action: manipulation;
+}
+
+#boshqaruv button:active {
+    background: #ab47bc;
+    transform: scale(0.95);
+}
+
+@media (max-width: 699px) {
+    body {
+        padding: 10px;
+    }
+
+    #oyinMaydoni {
+        height: min(62vh, 500px);
+        min-height: 300px;
+    }
+
+    #toti {
+        font-size: 42px;
+    }
+
+    .yulduz {
+        font-size: 30px;
+    }
+
+    #boshqaruv button {
+        width: 68px;
+        height: 56px;
+    }
+}
+
+@media (min-width: 700px) {
+    #boshqaruv,
+    #boshqaruvMatni {
+        display: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<h1>🦜 To‘ti ovi</h1>
+
+<p class="oyin-sharti">
+    🎯 Maqsad: yulduzlarni yig‘ib, 80 ochko to‘plang!
+</p>
+
+<button id="qayta" type="button" onclick="qaytaBoshlash()">
+    🔄 Qayta boshlash
+</button>
+
+<p id="boshqaruvMatni">
+    📱 To‘tini harakatlantirish uchun strelkalarni bosing.
+</p>
+
+<div id="oyinMaydoni">
+
+    <div id="ochko">Ochko: 0</div>
+
+    <div id="toti">🦜</div>
+
+    <div class="yulduz" data-ochko="5"
+         style="left: 15%; top: 15%;">⭐</div>
+
+    <div class="yulduz" data-ochko="7"
+         style="left: 36%; top: 30%;">⭐</div>
+
+    <div class="yulduz" data-ochko="8"
+         style="left: 62%; top: 12%;">⭐</div>
+
+    <div class="yulduz" data-ochko="10"
+         style="left: 82%; top: 35%;">⭐</div>
+
+    <div class="yulduz" data-ochko="12"
+         style="left: 20%; top: 70%;">⭐</div>
+
+    <div class="yulduz" data-ochko="15"
+         style="left: 45%; top: 60%;">⭐</div>
+
+    <div class="yulduz" data-ochko="18"
+         style="left: 67%; top: 78%;">⭐</div>
+
+    <div class="yulduz" data-ochko="20"
+         style="left: 85%; top: 65%;">⭐</div>
+
+</div>
+
+<div id="boshqaruv">
+    <button type="button" onclick="harakat('up')"
+        aria-label="Yuqoriga">⬆️</button>
+    <br>
+    <button type="button" onclick="harakat('left')"
+        aria-label="Chapga">⬅️</button>
+    <button type="button" onclick="harakat('down')"
+        aria-label="Pastga">⬇️</button>
+    <button type="button" onclick="harakat('right')"
+        aria-label="O‘ngga">➡️</button>
+</div>
+
+<div id="xabar">Omad tilaymiz! 🏆</div>
+
+<script>
+const toti = document.getElementById("toti");
+const maydon = document.getElementById("oyinMaydoni");
+const ochkoMatni = document.getElementById("ochko");
+const xabar = document.getElementById("xabar");
+const yulduzlar = document.querySelectorAll(".yulduz");
+
+let x = 30;
+let y = 200;
+let ochko = 0;
+let oyinTugadi = false;
+let oxirgiYonalish = "right";
+
+const tezlik = 12;
+const totiOlchami = 48;
+
+function chegarala() {
+    const kenglik = maydon.clientWidth;
+    const balandlik = maydon.clientHeight;
+
+    x = Math.max(0, Math.min(x, kenglik - totiOlchami));
+    y = Math.max(0, Math.min(y, balandlik - totiOlchami));
+}
+
+function joylashtir() {
+    chegarala();
+
+    toti.style.left = x + "px";
+    toti.style.top = y + "px";
+
+    // To‘ti harakat yo‘nalishiga qaraydi.
+    // Emoji chapga qarashi uchun akslantiramiz.
+    toti.style.transform =
+        oxirgiYonalish === "left"
+        ? "scaleX(1)"
+        : "scaleX(-1)";
+}
+
+function harakat(yonalish) {
+    if (oyinTugadi) return;
+
+    if (yonalish === "right") {
+        x += tezlik;
+        oxirgiYonalish = "right";
+    }
+
+    if (yonalish === "left") {
+        x -= tezlik;
+        oxirgiYonalish = "left";
+    }
+
+    if (yonalish === "up") {
+        y -= tezlik;
+    }
+
+    if (yonalish === "down") {
+        y += tezlik;
+    }
+
+    joylashtir();
+    tekshir();
+}
+
+document.addEventListener("keydown", function(event) {
+    const tugmalar = {
+        ArrowLeft: "left",
+        ArrowRight: "right",
+        ArrowUp: "up",
+        ArrowDown: "down"
+    };
+
+    const yonalish = tugmalar[event.key];
+
+    if (!yonalish) return;
+
+    event.preventDefault();
+    harakat(yonalish);
+});
+
+function tekshir() {
+    const totiRect = toti.getBoundingClientRect();
+
+    yulduzlar.forEach(function(yulduz) {
+        if (yulduz.dataset.yigildi === "ha") return;
+
+        const yulduzRect = yulduz.getBoundingClientRect();
+
+        const tegdi =
+            totiRect.left < yulduzRect.right &&
+            totiRect.right > yulduzRect.left &&
+            totiRect.top < yulduzRect.bottom &&
+            totiRect.bottom > yulduzRect.top;
+
+        if (tegdi) {
+            yulduz.dataset.yigildi = "ha";
+            yulduz.style.display = "none";
+
+            ochko += Number(yulduz.dataset.ochko);
+            ochkoMatni.textContent = "Ochko: " + ochko;
+
+            if (ochko >= 80) {
+                oyinTugadi = true;
+                xabar.textContent =
+                    "🏆 G‘ALABA! 80 ochko to‘pladingiz!";
+            } else {
+                xabar.textContent =
+                    "⭐ Barakalla! Yana yulduzlar yig‘ing!";
+            }
+        }
+    });
+}
+
+function qaytaBoshlash() {
+    x = 30;
+    y = 200;
+    ochko = 0;
+    oyinTugadi = false;
+    oxirgiYonalish = "right";
+
+    yulduzlar.forEach(function(yulduz) {
+        yulduz.style.display = "block";
+        delete yulduz.dataset.yigildi;
+    });
+
+    ochkoMatni.textContent = "Ochko: 0";
+    xabar.textContent = "Omad tilaymiz! 🏆";
+
+    joylashtir();
+}
+
+// O‘yin ochilganda To‘tini maydonga to‘g‘ri joylashtiramiz.
+joylashtir();
+</script>
+
+</body>
+</html>
